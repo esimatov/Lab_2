@@ -1,50 +1,50 @@
-/// в этом файле описывается всё, указанное в book.h
-#include <iostream> ///библиотека ввода-вывода
-#include "Book.h"   ///наша бибиллиотека класса книга
-#include <string>   ///бибилиотека строк
-#include <cstring>  ///библиотека функций работающих со строками
+/// РІ СЌС‚РѕРј С„Р°Р№Р»Рµ РѕРїРёСЃС‹РІР°РµС‚СЃСЏ РІСЃС‘, СѓРєР°Р·Р°РЅРЅРѕРµ РІ book.h
+#include <iostream> ///Р±РёР±Р»РёРѕС‚РµРєР° РІРІРѕРґР°-РІС‹РІРѕРґР°
+#include "Book.h"   ///РЅР°С€Р° Р±РёР±РёР»Р»РёРѕС‚РµРєР° РєР»Р°СЃСЃР° РєРЅРёРіР°
+#include <string>   ///Р±РёР±РёР»РёРѕС‚РµРєР° СЃС‚СЂРѕРє
+#include <cstring>  ///Р±РёР±Р»РёРѕС‚РµРєР° С„СѓРЅРєС†РёР№ СЂР°Р±РѕС‚Р°СЋС‰РёС… СЃРѕ СЃС‚СЂРѕРєР°РјРё
 
 using namespace std;
-    Book :: Book()  ///конструктор
+    Book :: Book()  ///РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     {
         setCountPage(0);
     }
-    Book :: Book(const string *author, const string *name, const int &countPage)//конструктор с параметрами
+    Book :: Book(const string *author, const string *name, const int &countPage)//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
     {
         this -> author = *(author);
         this -> name = *(name);
         this -> countPage = countPage;
     }
 
-    Book :: Book (const Book &otherBook)    ///конструктор копирования
+    Book :: Book (const Book &otherBook)    ///РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
     {
         this -> author = otherBook.author;
         this -> name = otherBook.name;
         this -> countPage = otherBook.countPage;
     }
-    void Book :: print()   ///вывод всей информации о книге
+    void Book :: print()   ///РІС‹РІРѕРґ РІСЃРµР№ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РєРЅРёРіРµ
     {   cout << "\nAuthor: " << author << "\nName: " << name << "\nCount of pages: " << countPage << endl;    }
 
-    void Book :: setName(const string *name)    ///установка имя книги
+    void Book :: setName(const string *name)    ///СѓСЃС‚Р°РЅРѕРІРєР° РёРјСЏ РєРЅРёРіРё
     {   this -> name = *(name);  }
 
-    void Book :: setAuthor(const string *author)    ///установка автора книги
+    void Book :: setAuthor(const string *author)    ///СѓСЃС‚Р°РЅРѕРІРєР° Р°РІС‚РѕСЂР° РєРЅРёРіРё
     {   this -> author = *(author);  }
 
-    void Book :: setCountPage(const int &countPage) ///установка числа страниц в книге
+    void Book :: setCountPage(const int &countPage) ///СѓСЃС‚Р°РЅРѕРІРєР° С‡РёСЃР»Р° СЃС‚СЂР°РЅРёС† РІ РєРЅРёРіРµ
     {   this -> countPage = countPage;  }
 
-    string Book :: getName()    ///взятие имени книги из объекта класса
+    string Book :: getName()    ///РІР·СЏС‚РёРµ РёРјРµРЅРё РєРЅРёРіРё РёР· РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР°
     {
         return name;
     }
 
-    string Book :: getAuthor()  ///взятие автора книги из объекта класса
+    string Book :: getAuthor()  ///РІР·СЏС‚РёРµ Р°РІС‚РѕСЂР° РєРЅРёРіРё РёР· РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР°
     {
         return author;
     }
 
-   int Book :: getCountPage()   ///взятие числа страниц из объекта класса
+   int Book :: getCountPage()   ///РІР·СЏС‚РёРµ С‡РёСЃР»Р° СЃС‚СЂР°РЅРёС† РёР· РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР°
     {
         return countPage;
     }
@@ -53,46 +53,46 @@ using namespace std;
 
 
 
-    Book& Book :: operator = (const Book &book)//перегрузка оператора присваивания
+    Book& Book :: operator = (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
     {
-        this -> author = book.author;//присваивает поля текущему объекту из другого
+        this -> author = book.author;//РїСЂРёСЃРІР°РёРІР°РµС‚ РїРѕР»СЏ С‚РµРєСѓС‰РµРјСѓ РѕР±СЉРµРєС‚Сѓ РёР· РґСЂСѓРіРѕРіРѕ
         this -> name = book.name;
         this -> countPage = book.countPage;
-        return *this;//при помощи указателя возвращает присвоенные поля объекту
+        return *this;//РїСЂРё РїРѕРјРѕС‰Рё СѓРєР°Р·Р°С‚РµР»СЏ РІРѕР·РІСЂР°С‰Р°РµС‚ РїСЂРёСЃРІРѕРµРЅРЅС‹Рµ РїРѕР»СЏ РѕР±СЉРµРєС‚Сѓ
     }
 
-    bool Book :: operator == (const Book &book)//перегрузка оператора равно
+    bool Book :: operator == (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° СЂР°РІРЅРѕ
     {
-        return ((this -> name == book.name)&&(this -> author == book.author)&&(this -> countPage == book.countPage));//сравнивание объектов при помощи сравнения каждого поля
+        return ((this -> name == book.name)&&(this -> author == book.author)&&(this -> countPage == book.countPage));//СЃСЂР°РІРЅРёРІР°РЅРёРµ РѕР±СЉРµРєС‚РѕРІ РїСЂРё РїРѕРјРѕС‰Рё СЃСЂР°РІРЅРµРЅРёСЏ РєР°Р¶РґРѕРіРѕ РїРѕР»СЏ
     }
 
-    bool Book :: operator != (const Book &book)//перегрузка оператора не равно
+    bool Book :: operator != (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РЅРµ СЂР°РІРЅРѕ
     {
-        return ((this -> name != book.name)&&(this -> author != book.author)&&(this -> countPage != book.countPage));//как и в операторе равно сравнение объектов при помощи сравнения каждого поля
+        return ((this -> name != book.name)&&(this -> author != book.author)&&(this -> countPage != book.countPage));//РєР°Рє Рё РІ РѕРїРµСЂР°С‚РѕСЂРµ СЂР°РІРЅРѕ СЃСЂР°РІРЅРµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ РїСЂРё РїРѕРјРѕС‰Рё СЃСЂР°РІРЅРµРЅРёСЏ РєР°Р¶РґРѕРіРѕ РїРѕР»СЏ
     }
 
-    bool Book :: operator > (const Book &book)//перегрузка оператора больше
+    bool Book :: operator > (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° Р±РѕР»СЊС€Рµ
     {
-        if (this -> author > book.author)//приоритет отдал полю автора
+        if (this -> author > book.author)//РїСЂРёРѕСЂРёС‚РµС‚ РѕС‚РґР°Р» РїРѕР»СЋ Р°РІС‚РѕСЂР°
         {
             return true;
         }
         else
             {
-            if ((this -> author == book.author)&&(this -> name > book.name))//затем имя книги
+            if ((this -> author == book.author)&&(this -> name > book.name))//Р·Р°С‚РµРј РёРјСЏ РєРЅРёРіРё
             {
                 return true;
             }
         else
             {
-                if ((this -> author == book.author)&&(this -> name == book.name)&&(this -> countPage > book.countPage))//самый низкий приоритет у количества страниц
+                if ((this -> author == book.author)&&(this -> name == book.name)&&(this -> countPage > book.countPage))//СЃР°РјС‹Р№ РЅРёР·РєРёР№ РїСЂРёРѕСЂРёС‚РµС‚ Сѓ РєРѕР»РёС‡РµСЃС‚РІР° СЃС‚СЂР°РЅРёС†
                     return true;
             }
         }
         return false;
     }
 
-    bool Book :: operator < (const Book &book)//перегрузка оператора меньше схожа с оператором больше
+    bool Book :: operator < (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РјРµРЅСЊС€Рµ СЃС…РѕР¶Р° СЃ РѕРїРµСЂР°С‚РѕСЂРѕРј Р±РѕР»СЊС€Рµ
     {
         if (this -> author < book.author)
         {
@@ -113,9 +113,9 @@ using namespace std;
         return false;
     }
 
-    bool Book :: operator <= (const Book &book)//перегрузка оператора меньше либо равно
+    bool Book :: operator <= (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РјРµРЅСЊС€Рµ Р»РёР±Рѕ СЂР°РІРЅРѕ
     {
-        if (this -> author > book.author)//поочередное сравнение полей
+        if (this -> author > book.author)//РїРѕРѕС‡РµСЂРµРґРЅРѕРµ СЃСЂР°РІРЅРµРЅРёРµ РїРѕР»РµР№
         {
             return false;
         }
@@ -134,7 +134,7 @@ using namespace std;
         return true;
     }
 
-    bool Book :: operator >= (const Book &book)//перегрузка оператора больше либо равно по тому же принципу
+    bool Book :: operator >= (const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° Р±РѕР»СЊС€Рµ Р»РёР±Рѕ СЂР°РІРЅРѕ РїРѕ С‚РѕРјСѓ Р¶Рµ РїСЂРёРЅС†РёРїСѓ
     {
         if (this -> author < book.author)
         {
@@ -155,13 +155,13 @@ using namespace std;
         return true;
     }
 
-    ostream& operator << (ostream &out, const Book &book)//перегрузка оператора вывода
+    ostream& operator << (ostream &out, const Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РІС‹РІРѕРґР°
     {
         out << "Author:\t" << book.author << "\tName:\t" << book.name << "\tColor:\t" << book.countPage;
         return out;
     }
 
-    istream& operator >> (istream &in, Book &book)//перегрузка оператора ввода
+    istream& operator >> (istream &in, Book &book)//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РІРІРѕРґР°
     {
         in >> book.author;
         in >> book.name;
