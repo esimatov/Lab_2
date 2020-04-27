@@ -81,8 +81,8 @@ int main()
                     {
                         Books[i-1].setCountPage(tmpCountPage);
                     }else{
-                        cout << "\nUncorrect count of page input. Repeat." << endl;
-                        }
+                        cout << "\nUncorrect count of page input. Cancel." << endl;
+                        }//неприсваивание нового значения числа страниц при отрицательном аргументе
                     break;
                 case 4:
                     cout << "\nTaken book's name:\t" << (tmpName = Books[i-1].getName()) << endl;
