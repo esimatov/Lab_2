@@ -9,11 +9,14 @@ using namespace std;
     {
         setCountPage(0);
     }
-    Book :: Book(const string *author, const string *name, const int &countPage)//конструктор с параметрами
+    Book :: Book(const string &author, const string &name, const int &countPage)
     {
-        this -> author = *(author);
-        this -> name = *(name);
-        this -> countPage = countPage;
+        this -> author = author;
+        this -> name = name;
+        if( countPage >=0 )
+            this -> countPage = countPage;
+        else
+            this -> countPage = 0;
     }
 
     Book :: Book (const Book &otherBook)    ///конструктор копирования
@@ -22,29 +25,32 @@ using namespace std;
         this -> name = otherBook.name;
         this -> countPage = otherBook.countPage;
     }
-    void Book :: print()   ///вывод всей информации о книге
+    void Book :: print()const   ///вывод всей информации о книге
     {   cout << "\nAuthor: " << author << "\nName: " << name << "\nCount of pages: " << countPage << endl;    }
 
-    void Book :: setName(const string *name)    ///установка имя книги
-    {   this -> name = *(name);  }
+    void Book :: setName(const string &name)    ///установка имя книги
+    {   this -> name = name;  }
 
-    void Book :: setAuthor(const string *author)    ///установка автора книги
-    {   this -> author = *(author);  }
+    void Book :: setAuthor(const string &author)    ///установка автора книги
+    {   this -> author = author;  }
 
     void Book :: setCountPage(const int &countPage) ///установка числа страниц в книге
-    {   this -> countPage = countPage;  }
+    {
+        if(countPage >= 0)                  ///число страниц не меньше 0
+            this -> countPage = countPage;
+    }
 
-    string Book :: getName()    ///взятие имени книги из объекта класса
+    const string& Book :: getName()const    ///взятие имени книги из объекта класса
     {
         return name;
     }
 
-    string Book :: getAuthor()  ///взятие автора книги из объекта класса
+    const string& Book :: getAuthor()const  ///взятие автора книги из объекта класса
     {
         return author;
     }
 
-   int Book :: getCountPage()   ///взятие числа страниц из объекта класса
+   const int Book :: getCountPage()const   ///взятие числа страниц из объекта класса
     {
         return countPage;
     }
@@ -53,115 +59,63 @@ using namespace std;
 
 
 
-    Book& Book :: operator = (const Book &book)//перегрузка оператора присваивания
+    Book& Book :: operator = (const Book &book)
     {
-        this -> author = book.author;//присваивает поля текущему объекту из другого
+        this -> author = book.author;
         this -> name = book.name;
         this -> countPage = book.countPage;
-        return *this;//при помощи указателя возвращает присвоенные поля объекту
+        return *this;
     }
 
-    bool Book :: operator == (const Book &book)//перегрузка оператора равно
+    const bool Book :: operator == (const Book &book)
     {
-        return ((this -> name == book.name)&&(this -> author == book.author)&&(this -> countPage == book.countPage));//сравнивание объектов при помощи сравнения каждого поля
+        return ((this -> name == book.name)&&(this -> author == book.author)&&(this -> countPage == book.countPage));
     }
 
-    bool Book :: operator != (const Book &book)//перегрузка оператора не равно
+    const bool Book :: operator != (const Book &book)
     {
-        return ((this -> name != book.name)&&(this -> author != book.author)&&(this -> countPage != book.countPage));//как и в операторе равно сравнение объектов при помощи сравнения каждого поля
+        return (!(*this == book));
     }
 
-    bool Book :: operator > (const Book &book)//перегрузка оператора больше
+    const bool Book :: operator > (const Book &book)
     {
-        if (this -> author > book.author)//приоритет отдал полю автора
+        if (this -> author > book.author)
         {
             return true;
-        }
-        else
-            {
-            if ((this -> author == book.author)&&(this -> name > book.name))//затем имя книги
-            {
-                return true;
-            }
-        else
-            {
-                if ((this -> author == book.author)&&(this -> name == book.name)&&(this -> countPage > book.countPage))//самый низкий приоритет у количества страниц
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    bool Book :: operator < (const Book &book)//перегрузка оператора меньше схожа с оператором больше
-    {
-        if (this -> author < book.author)
-        {
-            return true;
-        }
-        else
-            {
-            if ((this -> author == book.author)&&(this -> name < book.name))
-            {
-                return true;
-            }
-        else
-            {
-                if ((this -> author == book.author)&&(this -> name == book.name)&&(this -> countPage < book.countPage))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    bool Book :: operator <= (const Book &book)//перегрузка оператора меньше либо равно
-    {
-        if (this -> author > book.author)//поочередное сравнение полей
-        {
-            return false;
-        }
-        else
-            {
+        }else{
             if ((this -> author == book.author)&&(this -> name > book.name))
             {
-                return false;
-            }
-        else
-            {
+                return true;
+            }else{
                 if ((this -> author == book.author)&&(this -> name == book.name)&&(this -> countPage > book.countPage))
-                    return false;
+                    return true;
             }
         }
-        return true;
+        return false;
     }
 
-    bool Book :: operator >= (const Book &book)//перегрузка оператора больше либо равно по тому же принципу
+    const bool Book :: operator < (const Book &book)
     {
-        if (this -> author < book.author)
-        {
-            return false;
-        }
-        else
-            {
-            if ((this -> author == book.author)&&(this -> name < book.name))
-            {
-                return false;
-            }
-        else
-            {
-                if ((this -> author == book.author)&&(this -> name == book.name)&&(this -> countPage < book.countPage))
-                    return false;
-            }
-        }
-        return true;
+        return (!((*this > book)||(*this == book)));
     }
 
-    ostream& operator << (ostream &out, const Book &book)//перегрузка оператора вывода
+    const bool Book :: operator <= (const Book &book)
+    {
+        return (!(*this > book));
+    }
+
+    const bool Book :: operator >= (const Book &book)
+    {
+        return (!(*this < book));
+    }
+
+    ostream& operator << (ostream &out, const Book &book)
     {
         out << "Author:\t" << book.author << "\tName:\t" << book.name << "\tColor:\t" << book.countPage;
         return out;
     }
 
-    istream& operator >> (istream &in, Book &book)//перегрузка оператора ввода
+    istream& operator >> (istream &in, Book &book)
     {
         in >> book.author;
         in >> book.name;
